@@ -1,0 +1,1620 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Viaje a Europa · Arnaudo & Compañía · 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --gold:#C9A96E;--gold-light:#E8D5B0;--dark:#0A0A0F;--dark2:#12121A;--dark3:#1C1C28;
+  --cream:#F5F0E8;--cream2:#EDE5D4;--white:#FFFFFF;
+  --london:#2C3E6B;--paris:#8B2E4A;--brujas:#2E5E3E;--amsterdam:#7B4A1E;
+  --text:#E8E0D0;--text2:#A89880;
+  --font-serif:'Cormorant Garamond',Georgia,serif;
+  --font-sans:'DM Sans',sans-serif;
+  --radius:16px;--radius-sm:8px;
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
+html{scroll-behavior:smooth;}
+body{background:var(--dark);color:var(--text);font-family:var(--font-sans);font-size:15px;line-height:1.6;overflow-x:hidden;}
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar{width:4px;}
+::-webkit-scrollbar-track{background:var(--dark2);}
+::-webkit-scrollbar-thumb{background:var(--gold);border-radius:2px;}
+
+/* ── NAV BAR BOTTOM ── */
+.bottom-nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  background:rgba(10,10,15,0.95);backdrop-filter:blur(20px);
+  border-bottom:1px solid rgba(201,169,110,0.2);
+  display:flex;justify-content:space-around;align-items:center;
+  padding:max(8px,env(safe-area-inset-top)) 0 8px;
+}
+.nav-item{
+  display:flex;flex-direction:column;align-items:center;gap:3px;
+  color:var(--text2);font-size:10px;letter-spacing:.5px;text-transform:uppercase;
+  cursor:pointer;padding:6px 10px;border-radius:8px;transition:all .3s;border:none;background:none;
+  text-decoration:none;
+}
+.nav-item.active,.nav-item:hover{color:var(--gold);}
+.nav-icon{font-size:18px;line-height:1;}
+
+/* ── SECTIONS ── */
+.section{display:none;padding-top:64px;padding-bottom:20px;min-height:100vh;}
+
+.fade-in{animation:fadeUp .5s ease both;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+
+/* ── HERO ── */
+.hero{
+  min-height:100vh;display:flex;flex-direction:column;justify-content:flex-end;
+  position:relative;overflow:hidden;padding:32px 20px 100px;
+}
+.hero-bg{
+  position:absolute;inset:0;z-index:0;
+  background:linear-gradient(
+    135deg,
+    #1a1030 0%,
+    #0d1a2e 25%,
+    #1a0d1e 50%,
+    #0d2218 75%,
+    #1a1a0a 100%
+  );
+}
+.hero-overlay{
+  position:absolute;inset:0;z-index:1;
+  background:radial-gradient(ellipse 80% 60% at 50% 100%, rgba(201,169,110,0.08) 0%, transparent 70%);
+}
+.hero-stars{position:absolute;inset:0;z-index:1;overflow:hidden;}
+.star{position:absolute;width:2px;height:2px;background:white;border-radius:50%;animation:twinkle var(--dur) ease-in-out infinite var(--del);}
+@keyframes twinkle{0%,100%{opacity:.2;}50%{opacity:1;}}
+.hero-content{position:relative;z-index:2;}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(201,169,110,0.12);border:1px solid rgba(201,169,110,0.3);
+  border-radius:100px;padding:6px 14px;font-size:11px;letter-spacing:2px;
+  text-transform:uppercase;color:var(--gold);margin-bottom:20px;
+}
+.hero-title{
+  font-family:var(--font-serif);font-size:clamp(38px,10vw,56px);font-weight:300;
+  line-height:1.1;color:var(--white);margin-bottom:8px;
+}
+.hero-title em{color:var(--gold);font-style:italic;}
+.hero-names{
+  font-family:var(--font-serif);font-size:clamp(15px,4vw,18px);font-weight:300;
+  color:var(--gold-light);letter-spacing:1px;margin-bottom:24px;font-style:italic;
+}
+.hero-dates{
+  display:flex;gap:16px;flex-wrap:wrap;margin-bottom:32px;
+}
+.hero-date-pill{
+  background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);
+  border-radius:100px;padding:8px 16px;font-size:13px;color:var(--text2);
+}
+.hero-date-pill strong{color:var(--text);font-weight:500;}
+.countdown-card{
+  background:rgba(201,169,110,0.08);border:1px solid rgba(201,169,110,0.25);
+  border-radius:var(--radius);padding:20px;margin-bottom:24px;
+}
+.countdown-label{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:12px;}
+.countdown-boxes{display:flex;gap:8px;}
+.countdown-box{
+  flex:1;background:rgba(0,0,0,0.3);border-radius:10px;padding:12px 4px;text-align:center;
+}
+.countdown-num{font-family:var(--font-serif);font-size:28px;font-weight:300;color:var(--white);line-height:1;}
+.countdown-unit{font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--text2);margin-top:2px;}
+.hero-cities{display:flex;gap:8px;flex-wrap:wrap;}
+.city-chip{
+  display:flex;align-items:center;gap:6px;
+  background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);
+  border-radius:100px;padding:7px 14px;font-size:12px;color:var(--text);
+}
+.city-dot{width:8px;height:8px;border-radius:50%;}
+
+/* ── SECTION HEADER ── */
+.section-header{
+  padding:32px 20px 0;
+  display:flex;align-items:center;gap:12px;margin-bottom:24px;
+}
+.section-icon{
+  width:44px;height:44px;border-radius:12px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:22px;flex-shrink:0;
+}
+.section-title{font-family:var(--font-serif);font-size:26px;font-weight:300;color:var(--white);}
+.section-sub{font-size:12px;color:var(--text2);letter-spacing:1px;text-transform:uppercase;}
+
+/* ── CARDS ── */
+.card{
+  background:var(--dark2);border:1px solid rgba(255,255,255,0.06);
+  border-radius:var(--radius);padding:20px;margin:0 16px 12px;
+}
+.card-accent{border-left:3px solid var(--gold);}
+.card-london{border-left:3px solid var(--london);}
+.card-paris{border-left:3px solid var(--paris);}
+.card-brujas{border-left:3px solid var(--brujas);}
+.card-amsterdam{border-left:3px solid var(--amsterdam);}
+
+/* ── ITINERARY ── */
+.day-card{
+  margin:0 16px 10px;border-radius:var(--radius);overflow:hidden;
+  border:1px solid rgba(255,255,255,0.07);
+}
+.day-header{
+  display:flex;align-items:center;gap:14px;padding:16px 20px;cursor:pointer;
+  transition:background .2s;user-select:none;
+}
+.day-header:hover,.day-header.open{background:rgba(255,255,255,0.04);}
+.day-num{
+  font-family:var(--font-serif);font-size:32px;font-weight:300;
+  color:var(--gold);line-height:1;min-width:36px;
+}
+.day-info{flex:1;}
+.day-date{font-size:12px;color:var(--text2);letter-spacing:.5px;}
+.day-city{font-size:16px;color:var(--white);font-weight:500;}
+.day-city-badge{
+  padding:3px 10px;border-radius:100px;font-size:11px;letter-spacing:.5px;
+  font-weight:500;flex-shrink:0;
+}
+.day-arrow{color:var(--text2);font-size:18px;transition:transform .3s;flex-shrink:0;}
+.day-header.open .day-arrow{transform:rotate(180deg);}
+.day-body{display:none;background:var(--dark3);border-top:1px solid rgba(255,255,255,0.06);}
+
+.day-event{
+  display:flex;gap:14px;padding:14px 20px;
+  border-bottom:1px solid rgba(255,255,255,0.05);
+}
+.day-event:last-child{border-bottom:none;}
+.event-icon{
+  width:36px;height:36px;border-radius:10px;
+  display:flex;align-items:center;justify-content:center;font-size:18px;
+  flex-shrink:0;margin-top:2px;
+}
+.event-content{flex:1;}
+.event-title{font-size:14px;color:var(--white);font-weight:500;margin-bottom:3px;}
+.event-detail{font-size:12px;color:var(--text2);margin-bottom:6px;}
+.event-link{
+  display:inline-flex;align-items:center;gap:4px;
+  font-size:11px;color:var(--gold);text-decoration:none;letter-spacing:.5px;
+}
+.event-link:hover{text-decoration:underline;}
+
+/* ── CITY GUIDES ── */
+.city-hero{
+  height:160px;display:flex;align-items:flex-end;padding:20px;position:relative;overflow:hidden;
+  margin:0 16px 16px;border-radius:var(--radius);
+}
+.city-hero-london{background:linear-gradient(135deg,#1a2040 0%,#2C3E6B 100%);}
+.city-hero-paris{background:linear-gradient(135deg,#3d0f1f 0%,#8B2E4A 100%);}
+.city-hero-brujas{background:linear-gradient(135deg,#0f2d1c 0%,#2E5E3E 100%);}
+.city-hero-amsterdam{background:linear-gradient(135deg,#3d2000 0%,#7B4A1E 100%);}
+.city-hero-text{position:relative;z-index:1;}
+.city-hero-pattern{
+  position:absolute;inset:0;opacity:.06;
+  background-image:repeating-linear-gradient(45deg,#fff 0,#fff 1px,transparent 0,transparent 50%);
+  background-size:20px 20px;
+}
+.city-hero-name{
+  font-family:var(--font-serif);font-size:32px;font-weight:300;
+  color:var(--white);line-height:1;
+}
+.city-hero-nights{font-size:12px;color:rgba(255,255,255,.6);letter-spacing:1px;}
+
+.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:0 16px;margin-bottom:12px;}
+.info-tile{
+  background:var(--dark2);border:1px solid rgba(255,255,255,0.06);
+  border-radius:var(--radius-sm);padding:14px;
+}
+.info-tile-label{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--text2);margin-bottom:4px;}
+.info-tile-value{font-size:15px;color:var(--white);font-weight:500;}
+
+/* ── TABS ── */
+.tabs-container{padding:0 16px;margin-bottom:16px;}
+.tabs{display:flex;gap:6px;overflow-x:auto;padding-bottom:4px;scrollbar-width:none;}
+.tabs::-webkit-scrollbar{display:none;}
+.tab{
+  flex-shrink:0;padding:8px 16px;border-radius:100px;font-size:12px;letter-spacing:.5px;
+  border:1px solid rgba(255,255,255,0.1);background:transparent;color:var(--text2);
+  cursor:pointer;transition:all .25s;white-space:nowrap;
+}
+.tab.active{background:var(--gold);color:var(--dark);border-color:var(--gold);font-weight:500;}
+
+/* ── PRACTICAL INFO ── */
+.practical-item{
+  display:flex;align-items:flex-start;gap:14px;
+  padding:14px 0;border-bottom:1px solid rgba(255,255,255,0.06);
+}
+.practical-item:last-child{border-bottom:none;}
+.practical-icon{font-size:22px;width:36px;text-align:center;flex-shrink:0;}
+.practical-label{font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--text2);margin-bottom:2px;}
+.practical-value{font-size:14px;color:var(--white);}
+
+/* ── CHECKLIST ── */
+.checklist-group{margin:0 16px 16px;}
+.checklist-group-title{
+  font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);
+  padding:12px 0 8px;border-bottom:1px solid rgba(201,169,110,0.2);margin-bottom:4px;
+}
+.check-item{
+  display:flex;align-items:center;gap:12px;padding:11px 4px;
+  border-bottom:1px solid rgba(255,255,255,0.04);cursor:pointer;transition:opacity .2s;
+}
+.check-item.done{opacity:.5;}
+.check-item.done .check-label{text-decoration:line-through;}
+.check-box{
+  width:22px;height:22px;border-radius:6px;border:1.5px solid rgba(255,255,255,0.2);
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .25s;
+}
+.check-item.done .check-box{background:var(--gold);border-color:var(--gold);color:var(--dark);}
+.check-label{font-size:14px;color:var(--text);flex:1;}
+.check-count{
+  font-size:11px;color:var(--text2);margin-left:8px;padding:3px 8px;
+  background:rgba(255,255,255,0.06);border-radius:100px;
+}
+
+/* ── TIPS ── */
+.tip-card{
+  margin:0 16px 10px;background:var(--dark2);
+  border:1px solid rgba(255,255,255,0.07);border-radius:var(--radius);padding:18px;
+}
+.tip-type{
+  font-size:10px;letter-spacing:2px;text-transform:uppercase;
+  color:var(--gold);margin-bottom:8px;display:flex;align-items:center;gap:6px;
+}
+.tip-text{font-size:14px;color:var(--text);line-height:1.6;}
+
+/* ── FAQ ── */
+.faq-item{margin:0 16px 8px;border-radius:var(--radius-sm);overflow:hidden;border:1px solid rgba(255,255,255,0.07);}
+.faq-q{
+  padding:16px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;
+  background:var(--dark2);font-size:14px;color:var(--white);font-weight:500;gap:12px;
+  transition:background .2s;user-select:none;
+}
+.faq-q:hover{background:var(--dark3);}
+.faq-a{display:none;padding:16px;background:var(--dark3);font-size:13px;color:var(--text2);line-height:1.7;border-top:1px solid rgba(255,255,255,0.06);}
+
+.faq-arrow{flex-shrink:0;transition:transform .3s;color:var(--gold);}
+.faq-item.open .faq-arrow{transform:rotate(180deg);}
+
+/* ── ALERT CARDS ── */
+.alert-card{
+  margin:0 16px 10px;border-radius:var(--radius);padding:18px;
+  display:flex;gap:14px;align-items:flex-start;
+}
+.alert-warning{background:rgba(201,169,110,0.1);border:1px solid rgba(201,169,110,0.3);}
+.alert-info{background:rgba(44,62,107,0.2);border:1px solid rgba(44,62,107,0.4);}
+.alert-danger{background:rgba(139,46,74,0.15);border:1px solid rgba(139,46,74,0.35);}
+.alert-icon{font-size:24px;flex-shrink:0;}
+.alert-title{font-size:13px;font-weight:600;color:var(--white);margin-bottom:4px;}
+.alert-text{font-size:13px;color:var(--text2);line-height:1.5;}
+
+/* ── FLIGHT CARD ── */
+.flight-card{
+  margin:0 16px 12px;background:var(--dark2);
+  border:1px solid rgba(255,255,255,0.08);border-radius:var(--radius);padding:20px;
+}
+.flight-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;}
+.flight-airline{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);}
+.flight-class{
+  font-size:10px;padding:3px 8px;background:rgba(201,169,110,0.12);
+  border:1px solid rgba(201,169,110,0.25);border-radius:100px;color:var(--gold);letter-spacing:.5px;
+}
+.flight-route{display:flex;align-items:center;gap:12px;margin-bottom:12px;}
+.flight-city{text-align:center;}
+.flight-code{font-family:var(--font-serif);font-size:28px;font-weight:300;color:var(--white);line-height:1;}
+.flight-name{font-size:11px;color:var(--text2);}
+.flight-time{font-size:15px;font-weight:500;color:var(--text);margin-top:4px;}
+.flight-arrow{flex:1;text-align:center;color:var(--gold);font-size:20px;position:relative;}
+.flight-duration{font-size:11px;color:var(--text2);letter-spacing:.5px;}
+.flight-details{display:flex;gap:10px;flex-wrap:wrap;}
+.flight-tag{
+  font-size:11px;color:var(--text2);padding:4px 10px;
+  background:rgba(255,255,255,0.05);border-radius:100px;
+}
+
+/* ── HOTEL CARD ── */
+.hotel-card{
+  margin:0 16px 12px;background:var(--dark2);
+  border:1px solid rgba(255,255,255,0.08);border-radius:var(--radius);padding:20px;
+}
+.hotel-stars{color:var(--gold);font-size:14px;margin-bottom:8px;}
+.hotel-name{font-family:var(--font-serif);font-size:22px;font-weight:300;color:var(--white);margin-bottom:4px;}
+.hotel-meta{font-size:12px;color:var(--text2);margin-bottom:14px;}
+.hotel-amenity{
+  display:inline-flex;align-items:center;gap:5px;
+  font-size:11px;color:var(--text2);padding:4px 10px;
+  background:rgba(255,255,255,0.05);border-radius:100px;margin:2px;
+}
+
+/* ── PROGRESS ── */
+.progress-wrap{padding:0 16px 16px;}
+.progress-label{display:flex;justify-content:space-between;font-size:12px;color:var(--text2);margin-bottom:6px;}
+.progress-bar{height:4px;background:rgba(255,255,255,0.08);border-radius:2px;overflow:hidden;}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--gold),#E8C97A);border-radius:2px;transition:width 1s ease;}
+
+/* ── INTRO TEXT ── */
+.intro-text{
+  font-family:var(--font-serif);font-size:18px;font-weight:300;font-style:italic;
+  color:var(--gold-light);line-height:1.7;padding:0 20px;margin-bottom:20px;text-align:center;
+}
+
+/* ── TAG ── */
+.tag{
+  display:inline-flex;align-items:center;gap:5px;
+  font-size:11px;padding:4px 10px;border-radius:100px;letter-spacing:.5px;font-weight:500;
+}
+.tag-london{background:rgba(44,62,107,0.3);color:#7B9FD4;border:1px solid rgba(44,62,107,0.5);}
+.tag-paris{background:rgba(139,46,74,0.25);color:#D47B9A;border:1px solid rgba(139,46,74,0.4);}
+.tag-brujas{background:rgba(46,94,62,0.25);color:#7BD47B;border:1px solid rgba(46,94,62,0.4);}
+.tag-amsterdam{background:rgba(123,74,30,0.25);color:#D4A07B;border:1px solid rgba(123,74,30,0.4);}
+
+/* ── DIVIDER ── */
+.divider{height:1px;background:rgba(255,255,255,0.06);margin:8px 20px 16px;}
+.divider-gold{height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:4px 20px 20px;}
+
+/* ── SUMMARY STATS ── */
+.stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding:0 16px;margin-bottom:12px;}
+.stat-box{
+  background:var(--dark2);border:1px solid rgba(255,255,255,0.06);
+  border-radius:var(--radius-sm);padding:16px 10px;text-align:center;
+}
+.stat-num{font-family:var(--font-serif);font-size:26px;font-weight:300;color:var(--gold);line-height:1;}
+.stat-label{font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--text2);margin-top:4px;}
+
+/* ── DESTINATION TAB CONTENT ── */
+.dest-content{display:none;padding:0 16px;}
+
+
+/* ── SUBSECTION ── */
+.subsection{margin-bottom:20px;}
+.subsection-title{
+  font-size:11px;letter-spacing:2px;text-transform:uppercase;
+  color:var(--gold);margin-bottom:10px;padding-bottom:6px;
+  border-bottom:1px solid rgba(201,169,110,0.15);
+}
+.bullet-list{list-style:none;}
+.bullet-list li{
+  padding:7px 0 7px 18px;font-size:13px;color:var(--text2);
+  border-bottom:1px solid rgba(255,255,255,0.04);position:relative;line-height:1.5;
+}
+.bullet-list li:last-child{border-bottom:none;}
+.bullet-list li::before{content:"›";position:absolute;left:0;color:var(--gold);}
+
+.section-p{font-size:14px;color:var(--text2);line-height:1.7;margin-bottom:12px;}
+
+/* ── MAP EMBED ── */
+.map-embed{
+  height:220px;border-radius:var(--radius);overflow:hidden;
+  margin:0 16px 12px;border:1px solid rgba(255,255,255,0.07);
+}
+.map-embed iframe{width:100%;height:100%;border:none;}
+
+/* ── PHRASE ── */
+.phrase-card{
+  margin:0 16px 12px;padding:20px;border-radius:var(--radius);
+  background:linear-gradient(135deg,rgba(201,169,110,0.08),rgba(201,169,110,0.03));
+  border:1px solid rgba(201,169,110,0.2);
+}
+.phrase-foreign{
+  font-family:var(--font-serif);font-size:18px;font-style:italic;
+  color:var(--white);margin-bottom:4px;
+}
+.phrase-spanish{font-size:12px;color:var(--text2);}
+
+/* ── EMERGENCY ── */
+.emergency-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:0 16px;margin-bottom:12px;}
+.emergency-tile{
+  background:rgba(139,46,74,0.1);border:1px solid rgba(139,46,74,0.25);
+  border-radius:var(--radius-sm);padding:14px;cursor:pointer;text-decoration:none;display:block;
+}
+.emergency-number{font-family:var(--font-serif);font-size:26px;font-weight:300;color:#E07090;line-height:1;}
+.emergency-label{font-size:11px;color:var(--text2);margin-top:2px;}
+
+@media(min-width:600px){
+  .bottom-nav{justify-content:center;gap:32px;}
+  .card,.day-card,.hotel-card,.flight-card,.tip-card,.faq-item,.alert-card,.checklist-group{max-width:600px;margin-left:auto;margin-right:auto;}
+  .info-grid,.stats-grid,.emergency-grid,.map-embed{max-width:568px;margin-left:auto;margin-right:auto;}
+  .city-hero,.dest-content{max-width:600px;margin-left:auto;margin-right:auto;}
+  .tabs-container,.progress-wrap{max-width:600px;margin-left:auto;margin-right:auto;}
+  .section-header,.intro-text,.divider,.divider-gold{max-width:600px;margin-left:auto;margin-right:auto;}
+}
+</style>
+</head>
+<body>
+
+<!-- SECTION: HERO -->
+<div id="sec-home" class="section" style="display:block">
+  <div class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-stars" id="starsContainer"></div>
+    <div class="hero-content fade-in">
+      <div class="hero-badge">✦ Da Scoprire Viajes ✦</div>
+      <h1 class="hero-title">Viaje a<br><em>Europa</em></h1>
+      <p class="hero-names">Susana · Griselda · Germán</p>
+      <div class="hero-dates">
+        <div class="hero-date-pill">✈ Salida <strong>3 Jun 2026</strong></div>
+        <div class="hero-date-pill">🏠 Regreso <strong>22 Jun 2026</strong></div>
+        <div class="hero-date-pill">📅 <strong>20 días</strong> de viaje</div>
+      </div>
+      <div class="countdown-card">
+        <div class="countdown-label">⏳ Cuenta regresiva · El viaje empieza en...</div>
+        <div class="countdown-boxes">
+          <div class="countdown-box"><div class="countdown-num" id="cd-days">0</div><div class="countdown-unit">días</div></div>
+          <div class="countdown-box"><div class="countdown-num" id="cd-hours">0</div><div class="countdown-unit">horas</div></div>
+          <div class="countdown-box"><div class="countdown-num" id="cd-mins">0</div><div class="countdown-unit">min</div></div>
+          <div class="countdown-box"><div class="countdown-num" id="cd-secs">0</div><div class="countdown-unit">seg</div></div>
+        </div>
+      </div>
+      <div class="hero-cities">
+        <div class="city-chip"><span class="city-dot" style="background:#7B9FD4"></span>Londres</div>
+        <div class="city-chip"><span class="city-dot" style="background:#D47B9A"></span>París</div>
+        <div class="city-chip"><span class="city-dot" style="background:#7BD47B"></span>Brujas</div>
+        <div class="city-chip"><span class="city-dot" style="background:#D4A07B"></span>Ámsterdam</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RESUMEN -->
+  <div style="padding:24px 16px 0;">
+    <div class="intro-text">"Europa te espera con historia, arte y sabores únicos. ¡Que sea el viaje de sus vidas!"</div>
+  </div>
+
+  <div class="stats-grid">
+    <div class="stat-box"><div class="stat-num">20</div><div class="stat-label">Días</div></div>
+    <div class="stat-box"><div class="stat-num">4</div><div class="stat-label">Ciudades</div></div>
+    <div class="stat-box"><div class="stat-num">17</div><div class="stat-label">Noches</div></div>
+  </div>
+  <div class="stats-grid">
+    <div class="stat-box"><div class="stat-num">5</div><div class="stat-label">Noches<br><span style="font-size:9px">Londres</span></div></div>
+    <div class="stat-box"><div class="stat-num">5</div><div class="stat-label">Noches<br><span style="font-size:9px">París</span></div></div>
+    <div class="stat-box"><div class="stat-num">3</div><div class="stat-label">Noches<br><span style="font-size:9px">Brujas</span></div></div>
+  </div>
+
+  <div class="divider-gold"></div>
+
+  <!-- ALOJAMIENTOS RÁPIDO -->
+  <div style="padding:0 16px 4px;"><p class="subsection-title">🏨 Sus alojamientos</p></div>
+  <div class="card card-london">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;">
+      <div>
+        <div class="tag tag-london" style="margin-bottom:8px;">🇬🇧 Londres · 5 noches</div>
+        <div style="font-family:var(--font-serif);font-size:18px;color:var(--white);">Hotel Riu Palace London Victoria</div>
+        <div style="font-size:12px;color:var(--text2);margin-top:4px;">Con desayuno incluido</div>
+      </div>
+    </div>
+  </div>
+  <div class="card card-paris">
+    <div class="tag tag-paris" style="margin-bottom:8px;">🇫🇷 París · 5 noches</div>
+    <div style="font-family:var(--font-serif);font-size:18px;color:var(--white);">Central St. Germain</div>
+    <div style="font-size:12px;color:var(--text2);margin-top:4px;">Con desayuno incluido</div>
+  </div>
+  <div class="card card-brujas">
+    <div class="tag tag-brujas" style="margin-bottom:8px;">🇧🇪 Brujas · 3 noches</div>
+    <div style="font-family:var(--font-serif);font-size:18px;color:var(--white);">Hotel du Theatre</div>
+    <div style="font-size:12px;color:var(--text2);margin-top:4px;">Sin desayuno (USD 21 aprox. por persona)</div>
+  </div>
+  <div class="card card-amsterdam">
+    <div class="tag tag-amsterdam" style="margin-bottom:8px;">🇳🇱 Ámsterdam · 4 noches</div>
+    <div style="font-family:var(--font-serif);font-size:18px;color:var(--white);">Hotel Van Gogh</div>
+    <div style="font-size:12px;color:var(--text2);margin-top:4px;">City tax: ~€86 total</div>
+  </div>
+
+  <div style="height:8px;"></div>
+</div>
+
+<!-- SECTION: ITINERARY -->
+<div id="sec-itinerary" class="section" style="display:none">
+  <div class="section-header fade-in">
+    <div class="section-icon" style="background:rgba(201,169,110,0.1);">🗓</div>
+    <div><div class="section-title">Itinerario</div><div class="section-sub">Día a día · 20 jornadas</div></div>
+  </div>
+
+  <!-- DAY 1 -->
+  <div class="day-card">
+    <div class="day-header" onclick="toggleDay(this)">
+      <div class="day-num">1</div>
+      <div class="day-info">
+        <div class="day-date">Miércoles 3 de junio</div>
+        <div class="day-city">✈ Buenos Aires → Londres</div>
+      </div>
+      <span class="day-city-badge tag tag-london">🇬🇧</span>
+      <span class="day-arrow">⌄</span>
+    </div>
+    <div class="day-body">
+      <div class="day-event">
+        <div class="event-icon" style="background:rgba(44,62,107,0.3);">✈</div>
+        <div class="event-content">
+          <div class="event-title">Vuelo Buenos Aires → Madrid</div>
+          <div class="event-detail">Sale 12:10 hs. · Llega 5:10 (+1) · Duración 12 hs.</div>
+          <div class="event-detail">AIR EUROPA · Equipaje de mano y bodega incluido</div>
+          <a href="https://www.aireuropa.com/ar/es/home" class="event-link" target="_blank">🔗 Air Europa</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAY 2 -->
+  <div class="day-card">
+    <div class="day-header" onclick="toggleDay(this)">
+      <div class="day-num">2</div>
+      <div class="day-info">
+        <div class="day-date">Jueves 4 de junio</div>
+        <div class="day-city">Arribo a Londres · Check-in</div>
+      </div>
+      <span class="day-city-badge tag tag-london">🇬🇧</span>
+      <span class="day-arrow">⌄</span>
+    </div>
+    <div class="day-body">
+      <div class="day-event">
+        <div class="event-icon" style="background:rgba(44,62,107,0.3);">🔄</div>
+        <div class="event-content">
+          <div class="event-title">Escala en Madrid Barajas</div>
+          <div class="event-detail">Tiempo entre vuelos: 2:25 hs.</div>
+        </div>
+      </div>
+      <div class="day-event">
+        <div class="event-icon" style="background:rgba(44,62,107,0.3);">✈</div>
+        <div class="event-content">
+          <div class="event-title">Vuelo Madrid → Londres Gatwick</div>
+          <div class="event-detail">Sale 7:35 · Llega 9:00 · Duración 2:25 hs. · AIR EUROPA</div>
+        </div>
+      </div>
+      <div class="day-event">
+        <div class="event-icon" style="background:rgba(44,62,107,0.3);">🚂</div>
+        <div class="event-content">
+          <div class="event-title">Gatwick Express → Estación Victoria</div>
+          <div class="event-detail">Tren directo · ~30 min · Pasajes abiertos a cualquier horario</div>
+          <a href="https://www.gatwickexpress.com/" class="event-link" target="_blank">🔗 Gatwick Express</div></div>
+      </div>
+      <div class="day-event">
+        <div class="event-icon" style="background:rgba(44,62,107,0.3);">🏨</div>
+        <div class="event-content">
+          <div class="event-title">Check-in: Hotel Riu Palace London Victoria</div>
+          <div class="event-detail">5 noches con desayuno</div>
+        </div>
+      </div>
+      <div class="day-event">
+        <div class="event-icon" style="background:rgba(44,62,107,0.3);">🚶</div>
+        <div class="event-content">
+          <div class="event-title">Free Tour por Londres · 16:00 hs.</div>
+          <div class="event-detail">Duración 2:30/3 hs. · A propina: £10-12 por persona</div>
+          <a href="https://www.civitatis.com/es/londres/free-tour-londres-174587" class="event-link" target="_blank">🔗 Reservar</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAY 3 -->
+  <div class="day-card">
+    <div class="day-header" onclick="toggleDay(this)">
+      <div class="day-num">3</div>
+      <div class="day-info">
+        <div class="day-date">Viernes 5 de junio</div>
+        <div class="day-city">Londres · Cambio de Guardia + Westminster</div>
+      </div>
+      <span class="day-city-badge tag tag-london">🇬🇧</span>
+      <span class="day-arrow">⌄</span>
+    </div>
+    <div class="day-body">
+      <div class="day-event">
+        <div class="event-icon" style="background:rgba(44,62,107,0.3);">💂</div>
+        <div class="event-content">
+          <div class="event-title">Cambio de Guardia · 11:00 hs.</div>
+          <div class="event-detail">Buckingham Palace · ¡Gratuito! · Llegar 30 min antes para lugar.</div>
+        </div>
+      </div>
+      <div class="day-event">
+        <div class="event-icon" style="background:rgba(44,62,107,0.3);">⛪</div>
+        <div class="event-content">
+          <div class="event-title">Abadía de Westminster con audioguía · 12:00-15:00 hs.</div>
+          <div class="event-detail">Con audioguía en español · ~£21 por persona</div>
+          <a href="https://www.civitatis.com/es/londres/entrada-abadia-westminster" class="event-link" target="_blank">🔗 Entrada</div></div>
+      </div>
+      <div class="day-event">
+        <div class="event-icon" style="background:rgba(44,62,107,0.3);">🌿</div>
+        <div class="event-content">
+          <div class="event-title">Sky Garden · Music Night · 18:30 hs.</div>
+          <div class="event-detail">Jardín en la azotea + trago de bienvenida de pie</div>
+          <a href="https://skygarden.london/" class="event-link" target="_blank">🔗 skygarden.london</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAYS 4-5 -->
+  <div class="day-card">
+    <div class="day-header" onclick="toggleDay(this)">
+      <div class="day-num">4-5</div>
+      <div class="day-info">
+        <div class="day-date">Sáb 6 y Dom 7 de junio</div>
+        <div class="day-city">Londres · Big Bus Hop-On Hop-Off</div>
+      </div>
+      <span class="day-city-badge tag tag-london">🇬🇧</span>
+      <span class="day-arrow">⌄</span>
+    </div>
+    <div class="day-body">
+      <div class="day-event">
+        <div class="event-icon" style="background:rgba(44,62,107,0.3);">🚌</div>
+        <div class="event-content">
+          <div class="event-title">Big Bus Turístico Londres · 48 horas</div>
+          <div class="event-detail">Con audioguía en español · Suben y bajan las veces que deseen</div>
+          <div class="event-detail">Ideal para: Tower Bridge, London Eye, Borough Market, Covent Garden, South Bank</div>
+          <a href="https://www.civitatis.com/es/londres/autobus-turistico-londres" class="event-link" target="_blank">🔗 Reservar</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAY 6 -->
+  <div class="day-card">
+    <div class="day-header" onclick="toggleDay(this)">
+      <div class="day-num">6</div>
+      <div class="day-info">
+        <div class="day-date">Lunes 8 de junio</div>
+        <div class="day-city">Londres · British Museum</div>
+      </div>
+      <span class="day-city-badge tag tag-london">🇬🇧</span>
+      <span class="day-arrow">⌄</span>
+    </div>
+    <div class="day-body">
+      <div class="day-event">
+        <div class="event-icon" style="background:rgba(44,62,107,0.3);">🏛</div>
+        <div class="event-content">
+          <div class="event-title">Free Tour Museo Británico · 10:00 hs.</div>
+          <div class="event-detail">Duración 2:30 hs. · A propina: £10-12 por persona</div>
+          <div class="event-detail">El museo en sí es gratuito para entrar. ¡Una de las colecciones más grandes del mundo!</div>
+          <a href="https://www.civitatis.com/es/londres/free-tour-museo-britanico" class="event-link" target="_blank">🔗 Reservar guía</div></div>
+      </div>
+      <div class="day-event">
+        <div class="event-icon" style="background:rgba(44,62,107,0.3);">🛍</div>
+        <div class="event-content">
+          <div class="event-title">Tarde libre sugerida</div>
+          <div class="event-detail">Mercado de Camden Town, Carnaby Street o descanso</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAY 7 -->
+  <div class="day-card">
+    <div class="day-header" onclick="toggleDay(this)">
+      <div class="day-num">7</div>
+      <div class="day-info">
+        <div class="day-date">Martes 9 de junio</div>
+        <div class="day-city">Londres → París en Eurostar</div>
+      </div>
+      <span class="day-city-badge tag tag-paris">🇫🇷</span>
+      <span class="day-arrow">⌄</span>
+    </div>
+    <div class="day-body">
+      <div class="day-event">
+        <div class="event-icon" style="background:rgba(139,46,74,0.3);">🚇</div>
+        <div class="event-content">
+          <div class="event-title">Traslado al St. Pancras International</div>
+          <div class="event-detail">Metro o taxi-app · Llegar 45 min antes del tren</div>
+        </div>
+      </div>
+      <div class="day-event">
+        <div class="event-icon" style="background:rgba(139,46,74,0.3);">🚄</div>
+        <div class="event-content">
+          <div class="event-title">Eurostar: Londres → París</div>
+          <div class="event-detail">Sale 10:31 · Llega 13:59 Gare du Nord · Duración 2:28 hs. · 2da clase con asientos reservados</div>
+          <a href="https://www.eurostar.com/rw-en" class="event-link" target="_blank">🔗 Eurostar</div></div>
+      </div>
+      <div class="day-event">
+        <div class="event-icon" style="background:rgba(139,46,74,0.3);">🏨</div>
+        <div class="event-content">
+          <div class="event-title">Check-in: Central St. Germain · París</div>
+          <div class="event-detail">5 noches con desayuno · Barrio Latino - Saint Germain des Prés</div>
+        </div>
+      </div>
+      <div class="day-event">
+        <div class="event-icon" style="background:rgba(139,46,74,0.3);">🚶</div>
+        <div class="event-content">
+          <div class="event-title">Free Tour París · 17:30 hs.</div>
+          <div class="event-detail">Duración 2:45 hs. · A propina: €10-15 por persona</div>
+          <a href="https://www.civitatis.com/es/paris/visita-guiada-paris" class="event-link" target="_blank">🔗 Reservar</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAY 8 -->
+  <div class="day-card">
+    <div class="day-header" onclick="toggleDay(this)">
+      <div class="day-num">8</div>
+      <div class="day-info">
+        <div class="day-date">Miércoles 10 de junio</div>
+        <div class="day-city">París · Louvre + Torre Eiffel</div>
+      </div>
+      <span class="day-city-badge tag tag-paris">🇫🇷</span>
+      <span class="day-arrow">⌄</span>
+    </div>
+    <div class="day-body">
+      <div class="day-event">
+        <div class="event-icon" style="background:rgba(139,46,74,0.3);">🎨</div>
+        <div class="event-content">
+          <div class="event-title">Museo del Louvre + audioguía · 9:30 hs.</div>
+          <div class="event-detail">Con horario reservado – sin espera. ¡La Gioconda, Venus de Milo y miles de obras más!</div>
+          <a href="https://www.louvre.fr/es" class="event-link" target="_blank">🔗 Louvre</div></div>
+      </div>
+      <div class="day-event">
+        <div class="event-icon" style="background:rgba(139,46,74,0.3);">🗼</div>
+        <div class="event-content">
+          <div class="event-title">Torre Eiffel – 1er y 2do piso por ascensor · 15:30 hs.</div>
+          <div class="event-detail">Con horario reservado – sin espera. Atardecer mágico desde arriba.</div>
+          <a href="https://www.toureiffel.paris/es" class="event-link" target="_blank">🔗 Torre Eiffel</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAYS 9-11 -->
+  <div class="day-card">
+    <div class="day-header" onclick="toggleDay(this)">
+      <div class="day-num">9-11</div>
+      <div class="day-info">
+        <div class="day-date">Jue 11 · Vie 12 · Sáb 13 de junio</div>
+        <div class="day-city">París · Días libres para explorar</div>
+      </div>
+      <span class="day-city-badge tag tag-paris">🇫🇷</span>
+      <span class="day-arrow">⌄</span>
+    </div>
+    <div class="day-body">
+      <div class="day-event">
+        <div class="event-icon" style="background:rgba(139,46,74,0.3);">💡</div>
+        <div class="event-content">
+          <div class="event-title">Sugerencias para estos días libres</div>
+          <div class="event-detail">🏛 Musée d'Orsay (Impresionismo, Van Gogh, Monet) · Reservar entrada online</div>
+          <div class="event-detail">⛵ Crucero por el Sena al atardecer · Desde Notre Dame</div>
+          <div class="event-detail">🛍 Galeries Lafayette · Butte Montmartre y Sacré-Cœur</div>
+          <div class="event-detail">🌳 Jardines de Versalles (día completo, tren RER C)</div>
+          <div class="event-detail">🥐 Desayuno en brasserie local · Café de Flore o Les Deux Magots</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAY 12 -->
+  <div class="day-card">
+    <div class="day-header" onclick="toggleDay(this)">
+      <div class="day-num">12</div>
+      <div class="day-info">
+        <div class="day-date">Domingo 14 de junio</div>
+        <div class="day-city">París → Brujas en FlixBus</div>
+      </div>
+      <span class="day-city-badge tag tag-brujas">🇧🇪</span>
+      <span class="day-arrow">⌄</span>
+    </div>
+    <div class="day-body">
+      <div class="day-event">
+        <div class="event-icon" style="background:rgba(46,94,62,0.3);">🚌</div>
+        <div class="event-content">
+          <div class="event-title">FlixBus: París (Bercy) → Brujas</div>
+          <div class="event-detail">Sale 6:30 · Llega 11:10 · Duración 4:40 hs. · Con asientos reservados</div>
+          <div class="event-detail">⚠ Ir a Gare de Bercy en taxi/app · Llegar 30 min antes</div>
+          <a href="https://www.flixbus.es/" class="event-link" target="_blank">🔗 FlixBus</div></div>
+      </div>
+      <div class="day-event">
+        <div class="event-icon" style="background:rgba(46,94,62,0.3);">🏨</div>
+        <div class="event-content">
+          <div class="event-title">Check-in: Hotel du Theatre · Brujas</div>
+          <div class="event-detail">3 noches · Sin desayuno incluido</div>
+        </div>
+      </div>
+      <div class="day-event">
+        <div class="event-icon" style="background:rgba(46,94,62,0.3);">🚶</div>
+        <div class="event-content">
+          <div class="event-title">Free Tour Brujas · 16:30 hs.</div>
+          <div class="event-detail">Duración 2 hs. · A propina: €10-15 por persona · City tax: €8.5</div>
+          <a href="https://www.civitatis.com/es/brujas/free-tour-brujas-187291" class="event-link" target="_blank">🔗 Reservar</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAY 13 -->
+  <div class="day-card">
+    <div class="day-header" onclick="toggleDay(this)">
+      <div class="day-num">13</div>
+      <div class="day-info">
+        <div class="day-date">Lunes 15 de junio</div>
+        <div class="day-city">Excursión a Gante</div>
+      </div>
+      <span class="day-city-badge tag tag-brujas">🇧🇪</span>
+      <span class="day-arrow">⌄</span>
+    </div>
+    <div class="day-body">
+      <div class="day-event">
+        <div class="event-icon" style="background:rgba(46,94,62,0.3);">🚶</div>
+        <div class="event-content">
+          <div class="event-title">Free Tour Gante · 11:30 hs.</div>
+          <div class="event-detail">Duración 2 hs. · A propina · Tren Brujas-Gante: 30 min</div>
+          <a href="https://www.civitatis.com/es/gante/free-tour-gante" class="event-link" target="_blank">🔗 Reservar</div></div>
+      </div>
+      <div class="day-event">
+        <div class="event-icon" style="background:rgba(46,94,62,0.3);">💡</div>
+        <div class="event-content">
+          <div class="event-title">En Gante no te pierdas</div>
+          <div class="event-detail">🏰 Castillo de los Condes (Gravensteen) · 🎨 Políptico de Gante (Catedral San Bavón) · 🌉 Korenlei y Graslei (los muelles históricos)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAY 14 -->
+  <div class="day-card">
+    <div class="day-header" onclick="toggleDay(this)">
+      <div class="day-num">14</div>
+      <div class="day-info">
+        <div class="day-date">Martes 16 de junio</div>
+        <div class="day-city">Excursión a Bruselas</div>
+      </div>
+      <span class="day-city-badge tag tag-brujas">🇧🇪</span>
+      <span class="day-arrow">⌄</span>
+    </div>
+    <div class="day-body">
+      <div class="day-event">
+        <div class="event-icon" style="background:rgba(46,94,62,0.3);">🚶</div>
+        <div class="event-content">
+          <div class="event-title">Free Tour Bruselas · 11:30 hs.</div>
+          <div class="event-detail">Duración 2-2:30 hs. · A propina · Tren Brujas-Bruselas: 1 hora</div>
+          <a href="https://www.civitatis.com/es/bruselas/free-tour-bruselas" class="event-link" target="_blank">🔗 Reservar</div></div>
+      </div>
+      <div class="day-event">
+        <div class="event-icon" style="background:rgba(46,94,62,0.3);">💡</div>
+        <div class="event-content">
+          <div class="event-title">En Bruselas no te pierdas</div>
+          <div class="event-detail">🏛 Grand Place (una de las plazas más bellas de Europa) · 🍫 Chocolaterías y tiendas de pralinés · 🍺 Bar en la Grand Place con una Gueuze</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAY 15 -->
+  <div class="day-card">
+    <div class="day-header" onclick="toggleDay(this)">
+      <div class="day-num">15</div>
+      <div class="day-info">
+        <div class="day-date">Miércoles 17 de junio</div>
+        <div class="day-city">Brujas → Ámsterdam en FlixBus</div>
+      </div>
+      <span class="day-city-badge tag tag-amsterdam">🇳🇱</span>
+      <span class="day-arrow">⌄</span>
+    </div>
+    <div class="day-body">
+      <div class="day-event">
+        <div class="event-icon" style="background:rgba(123,74,30,0.3);">🚌</div>
+        <div class="event-content">
+          <div class="event-title">FlixBus: Brujas → Ámsterdam (Sloterdijk)</div>
+          <div class="event-detail">Sale 14:20 · Llega 18:30 · Duración 4:10 hs. · Con asientos reservados</div>
+          <a href="https://www.flixbus.es/" class="event-link" target="_blank">🔗 FlixBus</div></div>
+      </div>
+      <div class="day-event">
+        <div class="event-icon" style="background:rgba(123,74,30,0.3);">🏨</div>
+        <div class="event-content">
+          <div class="event-title">Check-in: Hotel Van Gogh · Ámsterdam</div>
+          <div class="event-detail">4 noches · City tax: ~€86 total</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAY 16 -->
+  <div class="day-card">
+    <div class="day-header" onclick="toggleDay(this)">
+      <div class="day-num">16</div>
+      <div class="day-info">
+        <div class="day-date">Jueves 18 de junio</div>
+        <div class="day-city">Ámsterdam · Free Tours</div>
+      </div>
+      <span class="day-city-badge tag tag-amsterdam">🇳🇱</span>
+      <span class="day-arrow">⌄</span>
+    </div>
+    <div class="day-body">
+      <div class="day-event">
+        <div class="event-icon" style="background:rgba(123,74,30,0.3);">🚶</div>
+        <div class="event-content">
+          <div class="event-title">Free Tour Ámsterdam · 10:00 hs.</div>
+          <div class="event-detail">Duración 2-2:30 hs. · A propina: €10-15</div>
+          <a href="https://www.civitatis.com/es/amsterdam/free-tour-amsterdam" class="event-link" target="_blank">🔗 Reservar</div></div>
+      </div>
+      <div class="day-event">
+        <div class="event-icon" style="background:rgba(123,74,30,0.3);">🌙</div>
+        <div class="event-content">
+          <div class="event-title">Free Tour Barrio Rojo · 18:30 hs.</div>
+          <div class="event-detail">Duración 2:15 hs. · A propina · Historia y curiosidades del famoso barrio</div>
+          <a href="https://www.civitatis.com/es/amsterdam/free-tour-barrio-rojo" class="event-link" target="_blank">🔗 Reservar</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAY 17 -->
+  <div class="day-card">
+    <div class="day-header" onclick="toggleDay(this)">
+      <div class="day-num">17</div>
+      <div class="day-info">
+        <div class="day-date">Viernes 19 de junio</div>
+        <div class="day-city">Excursión Volendam, Marken, Edam y Zaanse Schans</div>
+      </div>
+      <span class="day-city-badge tag tag-amsterdam">🇳🇱</span>
+      <span class="day-arrow">⌄</span>
+    </div>
+    <div class="day-body">
+      <div class="day-event">
+        <div class="event-icon" style="background:rgba(123,74,30,0.3);">⛵</div>
+        <div class="event-content">
+          <div class="event-title">Excursión completa · 9:30 hs. · 8 horas</div>
+          <div class="event-detail">Bus + guía en español + ferry a Marken · Molinos, quesos, zuecos y canales pintorescos</div>
+          <a href="https://www.civitatis.com/ar/amsterdam/excursion-zaanse-schans-volendam-marken/" class="event-link" target="_blank">🔗 Reservar</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAY 18 -->
+  <div class="day-card">
+    <div class="day-header" onclick="toggleDay(this)">
+      <div class="day-num">18</div>
+      <div class="day-info">
+        <div class="day-date">Sábado 20 de junio</div>
+        <div class="day-city">Ámsterdam · Van Gogh + Canales</div>
+      </div>
+      <span class="day-city-badge tag tag-amsterdam">🇳🇱</span>
+      <span class="day-arrow">⌄</span>
+    </div>
+    <div class="day-body">
+      <div class="day-event">
+        <div class="event-icon" style="background:rgba(123,74,30,0.3);">🎨</div>
+        <div class="event-content">
+          <div class="event-title">Museo Van Gogh con audioguía · 9:15 hs.</div>
+          <div class="event-detail">Duración ~2 hs. · La mayor colección del mundo del artista</div>
+          <a href="https://www.civitatis.com/es/amsterdam/entrada-museo-van-gogh" class="event-link" target="_blank">🔗 Reservar</div></div>
+      </div>
+      <div class="day-event">
+        <div class="event-icon" style="background:rgba(123,74,30,0.3);">⛵</div>
+        <div class="event-content">
+          <div class="event-title">Paseo en barco por los canales · 12:30 hs.</div>
+          <div class="event-detail">Desde el centro · ~1 hora · Ver Ámsterdam desde el agua</div>
+          <a href="https://www.civitatis.com/es/amsterdam/paseo-barco-canales-amsterdam" class="event-link" target="_blank">🔗 Reservar</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAY 19 -->
+  <div class="day-card">
+    <div class="day-header" onclick="toggleDay(this)">
+      <div class="day-num">19</div>
+      <div class="day-info">
+        <div class="day-date">Domingo 21 de junio</div>
+        <div class="day-city">Ámsterdam → Buenos Aires</div>
+      </div>
+      <span class="day-city-badge" style="background:rgba(201,169,110,0.15);color:var(--gold);border:1px solid rgba(201,169,110,0.3);padding:3px 10px;border-radius:100px;font-size:11px;">✈ Regreso</span>
+      <span class="day-arrow">⌄</span>
+    </div>
+    <div class="day-body">
+      <div class="day-event">
+        <div class="event-icon" style="background:rgba(201,169,110,0.15);">🚕</div>
+        <div class="event-content">
+          <div class="event-title">Traslado al aeropuerto Schiphol</div>
+          <div class="event-detail">Taxi/app · Salir con tiempo (vuelo 19:00 · llegar 2 hs. antes)</div>
+        </div>
+      </div>
+      <div class="day-event">
+        <div class="event-icon" style="background:rgba(201,169,110,0.15);">✈</div>
+        <div class="event-content">
+          <div class="event-title">Vuelo Ámsterdam → Madrid</div>
+          <div class="event-detail">Sale 19:00 · Llega 21:40 · Duración 2:40 hs. · AIR EUROPA</div>
+        </div>
+      </div>
+      <div class="day-event">
+        <div class="event-icon" style="background:rgba(201,169,110,0.15);">🔄</div>
+        <div class="event-content">
+          <div class="event-title">Escala en Madrid Barajas</div>
+          <div class="event-detail">Tiempo entre vuelos: 2:15 hs.</div>
+        </div>
+      </div>
+      <div class="day-event">
+        <div class="event-icon" style="background:rgba(201,169,110,0.15);">✈</div>
+        <div class="event-content">
+          <div class="event-title">Vuelo Madrid → Buenos Aires Ezeiza</div>
+          <div class="event-detail">Sale 23:55 · Llega 7:40 (+1) · Duración 12:45 hs. · AIR EUROPA</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAY 20 -->
+  <div class="day-card">
+    <div class="day-header" onclick="toggleDay(this)">
+      <div class="day-num">20</div>
+      <div class="day-info">
+        <div class="day-date">Lunes 22 de junio</div>
+        <div class="day-city">🏠 Llegada a Buenos Aires · Ezeiza</div>
+      </div>
+      <span class="day-arrow">⌄</span>
+    </div>
+    <div class="day-body">
+      <div class="day-event">
+        <div class="event-icon">🏡</div>
+        <div class="event-content">
+          <div class="event-title">Arribo a Ezeiza · 7:40 a.m.</div>
+          <div class="event-detail">¡Bienvenidos de vuelta con los mejores recuerdos de Europa!</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="height:8px;"></div>
+</div>
+
+<!-- SECTION: DESTINATIONS -->
+<div id="sec-destinations" class="section" style="display:none">
+  <div class="section-header fade-in">
+    <div class="section-icon" style="background:rgba(201,169,110,0.1);">🌍</div>
+    <div><div class="section-title">Destinos</div><div class="section-sub">Guías de ciudad</div></div>
+  </div>
+
+  <div class="tabs-container">
+    <div class="tabs">
+      <div class="tab active" id="tab-london" onclick="destGo('london')">🇬🇧 Londres</div>
+      <div class="tab" id="tab-paris" onclick="destGo('paris')">🇫🇷 París</div>
+      <div class="tab" id="tab-brujas" onclick="destGo('brujas')">🇧🇪 Brujas</div>
+      <div class="tab" id="tab-amsterdam" onclick="destGo('amsterdam')">🇳🇱 Ámsterdam</div>
+    </div>
+  </div>
+
+  <!-- LONDON -->
+  <div id="dest-london" class="dest-content" style="display:block">
+    <div class="city-hero city-hero-london"><div class="city-hero-pattern"></div><div class="city-hero-text"><div class="city-hero-name">Londres</div><div class="city-hero-nights">5 noches · 4-9 junio</div></div></div>
+    <div class="subsection-title" style="padding:0 16px;">Sobre la ciudad</div>
+    <p class="section-p" style="padding:0 16px;">Londres es una de las ciudades más fascinantes del mundo: mezcla perfecta de tradición real, cultura de vanguardia, gastronomía internacional y parques majestuosos. Con 2.000 años de historia, cada barrio cuenta una historia diferente.</p>
+    <div class="subsection-title" style="padding:0 16px;">🌡 Clima en junio</div>
+    <div class="info-grid">
+      <div class="info-tile"><div class="info-tile-label">Temperatura</div><div class="info-tile-value">14°C – 21°C</div></div>
+      <div class="info-tile"><div class="info-tile-label">Lluvia</div><div class="info-tile-value">Frecuente · llevar paraguas</div></div>
+      <div class="info-tile"><div class="info-tile-label">Ropa</div><div class="info-tile-value">Capas + impermeable</div></div>
+      <div class="info-tile"><div class="info-tile-label">Amanecer/Ocaso</div><div class="info-tile-value">4:45 / 21:15 hs.</div></div>
+    </div>
+    <div class="subsection-title" style="padding:0 16px;">✨ No te pierdas</div>
+    <ul class="bullet-list" style="padding:0 16px;">
+      <li>Tower Bridge y la Torre de Londres (desde afuera impresiona; entrada opcional)</li>
+      <li>Buckingham Palace y St. James's Park (los flamencos reales viven ahí)</li>
+      <li>Tate Modern – arte contemporáneo gratuito frente al Támesis</li>
+      <li>Mercado de Borough Market – el mejor mercado gourmet de la ciudad (Jue-Sáb)</li>
+      <li>South Bank al atardecer – vistas increíbles del skyline</li>
+      <li>Covent Garden y sus artistas callejeros</li>
+      <li>Hyde Park – perfecto para picnic si sale el sol</li>
+    </ul>
+    <div class="subsection-title" style="padding:0 16px;">🍽 Gastronomía</div>
+    <ul class="bullet-list" style="padding:0 16px;">
+      <li><strong>Fish & Chips</strong> – el plato nacional; mejor en un pub tradicional</li>
+      <li><strong>Full English Breakfast</strong> – desayuno completo con bacon, huevos y baked beans</li>
+      <li><strong>Afternoon Tea</strong> – tradición del té de las 5; Fortnum & Mason lo hace perfecto</li>
+      <li><strong>Pie & Mash</strong> – humilde y delicioso, típico del East End</li>
+      <li><strong>Curry Mile (Brick Lane)</strong> – los mejores curry de Bangladesh del mundo</li>
+    </ul>
+    <div class="subsection-title" style="padding:0 16px;">💡 Consejos clave</div>
+    <ul class="bullet-list" style="padding:0 16px;">
+      <li>El Oyster Card (tarjeta recargable) es esencial para el metro y autobuses</li>
+      <li>Los museos más importantes son GRATUITOS: British Museum, National Gallery, V&A, Tate Modern</li>
+      <li>Los pubs cierran más temprano de lo que uno espera (23:00)</li>
+      <li>El efectivo se usa poco – casi todo con tarjeta contactless</li>
+      <li>Los taxis negros (Black Cabs) son carísimos; usar Uber o Bolt</li>
+    </ul>
+    <div class="subsection-title" style="padding:0 16px;">🗺 Mapa de Londres</div>
+    <div class="map-embed" style="margin:0 16px 12px;">
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d158858.18285984924!2d-0.24168!3d51.52864!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47d8a00baf21de75%3A0x52963a5addd52a99!2sLondres!5e0!3m2!1ses!2ses!4v1600000000000!5m2!1ses!2ses" allowfullscreen loading="lazy"></iframe>
+    </div>
+    <div class="subsection-title" style="padding:0 16px;">🗣 Frases útiles en inglés</div>
+    <div class="phrase-card"><div class="phrase-foreign">"Could you please help me?"</div><div class="phrase-spanish">¿Podría ayudarme, por favor?</div></div>
+    <div class="phrase-card"><div class="phrase-foreign">"How do I get to...?"</div><div class="phrase-spanish">¿Cómo llego a...?</div></div>
+    <div class="phrase-card"><div class="phrase-foreign">"How much does this cost?"</div><div class="phrase-spanish">¿Cuánto cuesta esto?</div></div>
+  </div>
+
+  <!-- PARIS -->
+  <div id="dest-paris" class="dest-content" style="display:none">
+    <div class="city-hero city-hero-paris"><div class="city-hero-pattern"></div><div class="city-hero-text"><div class="city-hero-name">París</div><div class="city-hero-nights">5 noches · 9-14 junio</div></div></div>
+    <div class="subsection-title" style="padding:0 16px;">Sobre la ciudad</div>
+    <p class="section-p" style="padding:0 16px;">La Ciudad de la Luz es quizás la capital cultural del mundo: arte, moda, gastronomía, arquitectura y romance se fusionan en cada rincón. Su hotel está en el mítico barrio de Saint-Germain-des-Prés, donde Picasso, Sartre y Hemingway pasaban sus días.</p>
+    <div class="subsection-title" style="padding:0 16px;">🌡 Clima en junio</div>
+    <div class="info-grid">
+      <div class="info-tile"><div class="info-tile-label">Temperatura</div><div class="info-tile-value">15°C – 24°C</div></div>
+      <div class="info-tile"><div class="info-tile-label">Lluvia</div><div class="info-tile-value">Moderada · llevar paraguas</div></div>
+      <div class="info-tile"><div class="info-tile-label">Ropa</div><div class="info-tile-value">Verano ligero + 1 abrigo</div></div>
+      <div class="info-tile"><div class="info-tile-label">Horas de luz</div><div class="info-tile-value">~16 horas de sol</div></div>
+    </div>
+    <div class="subsection-title" style="padding:0 16px;">✨ No te pierdas</div>
+    <ul class="bullet-list" style="padding:0 16px;">
+      <li>Torre Eiffel de noche – el show de luces dura 5 minutos cada hora</li>
+      <li>Montmartre y Sacré-Cœur – vistas de toda la ciudad + artistas</li>
+      <li>Musée d'Orsay – Van Gogh, Monet, Renoir en una antigua estación de tren</li>
+      <li>Palais Royal – jardín secreto con columnas de colores (foto obligatoria)</li>
+      <li>Marché d'Aligre – el mercado más auténtico y barato de París</li>
+      <li>Sainte-Chapelle – vitrales medievales de ensueño (€ 13 entrada)</li>
+      <li>Pont des Arts y las vistas desde el Pont de l'Alma</li>
+    </ul>
+    <div class="subsection-title" style="padding:0 16px;">🥐 Gastronomía</div>
+    <ul class="bullet-list" style="padding:0 16px;">
+      <li><strong>Croissant</strong> – probar en boulangerie local (los del hotel no cuentan)</li>
+      <li><strong>Steak-frites</strong> – el plato parisino por excelencia en cualquier brasserie</li>
+      <li><strong>Crêpes</strong> – dulces y saladas en los puestos de Montmartre</li>
+      <li><strong>Jambon-beurre</strong> – el sándwich más simple y más rico de la ciudad</li>
+      <li><strong>Macarons</strong> – Ladurée o Pierre Hermé, ambos cerca del barrio</li>
+      <li><strong>Queso y vino</strong> – pedir en cualquier cave à manger; la carta en francés impresiona</li>
+    </ul>
+    <div class="subsection-title" style="padding:0 16px;">💡 Consejos clave</div>
+    <ul class="bullet-list" style="padding:0 16px;">
+      <li>El metro es excelente; comprar carnet de 10 viajes (carnet t+)</li>
+      <li>Nunca coman en los restaurantes junto a los grandes monumentos – son para turistas y son caros</li>
+      <li>En los cafés siempre pedir "un café" (espresso); el "café au lait" es solo para el desayuno</li>
+      <li>La Torre Eiffel brilla con luces cada hora al anochecer durante 5 minutos</li>
+      <li>Evitar los "selfie stick sellers" en zonas turísticas</li>
+    </ul>
+    <div class="subsection-title" style="padding:0 16px;">🗺 Mapa de París</div>
+    <div class="map-embed" style="margin:0 16px 12px;">
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d83998.76457721!2d2.2769952!3d48.8589!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e66e1f06e2b70f%3A0x40b82c3688c9460!2sPar%C3%ADs!5e0!3m2!1ses!2ses!4v1600000000001!5m2!1ses!2ses" allowfullscreen loading="lazy"></iframe>
+    </div>
+    <div class="subsection-title" style="padding:0 16px;">🗣 Frases útiles en francés</div>
+    <div class="phrase-card"><div class="phrase-foreign">"Parlez-vous espagnol?"</div><div class="phrase-spanish">¿Habla español?</div></div>
+    <div class="phrase-card"><div class="phrase-foreign">"L'addition, s'il vous plaît"</div><div class="phrase-spanish">La cuenta, por favor</div></div>
+    <div class="phrase-card"><div class="phrase-foreign">"Où est le métro?"</div><div class="phrase-spanish">¿Dónde está el metro?</div></div>
+  </div>
+
+  <!-- BRUJAS -->
+  <div id="dest-brujas" class="dest-content" style="display:none">
+    <div class="city-hero city-hero-brujas"><div class="city-hero-pattern"></div><div class="city-hero-text"><div class="city-hero-name">Brujas</div><div class="city-hero-nights">3 noches · 14-17 junio</div></div></div>
+    <div class="subsection-title" style="padding:0 16px;">Sobre la ciudad</div>
+    <p class="section-p" style="padding:0 16px;">Brujas (Brugge) es la ciudad medieval mejor conservada de Europa. Sus canales, puentes de piedra, beguinajes y campanarios góticos crean una atmósfera de cuento de hadas. Es también la capital mundial del chocolate y la cerveza artesanal belga.</p>
+    <div class="subsection-title" style="padding:0 16px;">🌡 Clima en junio</div>
+    <div class="info-grid">
+      <div class="info-tile"><div class="info-tile-label">Temperatura</div><div class="info-tile-value">14°C – 20°C</div></div>
+      <div class="info-tile"><div class="info-tile-label">Lluvia</div><div class="info-tile-value">Posible · llevar paraguas</div></div>
+    </div>
+    <div class="subsection-title" style="padding:0 16px;">✨ No te pierdas en Brujas</div>
+    <ul class="bullet-list" style="padding:0 16px;">
+      <li>Markt (plaza central) y el Belfort (campanario) – subir los 366 escalones vale la pena</li>
+      <li>Paseo en barco por los canales – la mejor forma de ver la ciudad</li>
+      <li>Beguinaje y lago del Amor – tranquilidad pura</li>
+      <li>Churcher of Our Lady – alberga la Madonna de Brujas de Miguel Ángel</li>
+      <li>Groeningemuseum – Primitivos Flamencos, arte único en el mundo</li>
+      <li>Degustación en una chocolatería artesanal</li>
+    </ul>
+    <div class="subsection-title" style="padding:0 16px;">🍺 No comer sin probar</div>
+    <ul class="bullet-list" style="padding:0 16px;">
+      <li><strong>Moules-frites</strong> – mejillones con papas fritas, el plato belga clásico</li>
+      <li><strong>Waffle belga</strong> – no el de Lieja, sino el de Bruselas (crujiente y ligero)</li>
+      <li><strong>Cerveza belga artesanal</strong> – pedir una Trappist o Gueuze en 't Brugs Beertje</li>
+      <li><strong>Pralinés artesanales</strong> – Dumon, The Chocolate Line, Choco-Story Museum</li>
+      <li><strong>Stoemp</strong> – puré con verduras y salchicha, reconfortante</li>
+    </ul>
+    <div class="subsection-title" style="padding:0 16px;">🗺 Mapa de Brujas</div>
+    <div class="map-embed" style="margin:0 16px 12px;">
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d40131!2d3.2247!3d51.2093!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c350d8c8a89f07%3A0xa3b6c0f2fe6e48ef!2sBrujas!5e0!3m2!1ses!2ses!4v1600000000002!5m2!1ses!2ses" allowfullscreen loading="lazy"></iframe>
+    </div>
+    <div class="subsection-title" style="padding:0 16px;">🗣 Frases en neerlandés</div>
+    <div class="phrase-card"><div class="phrase-foreign">"Spreekt u Spaans/Engels?"</div><div class="phrase-spanish">¿Habla español/inglés?</div></div>
+    <div class="phrase-card"><div class="phrase-foreign">"De rekening, alstublieft"</div><div class="phrase-spanish">La cuenta, por favor</div></div>
+  </div>
+
+  <!-- AMSTERDAM -->
+  <div id="dest-amsterdam" class="dest-content" style="display:none">
+    <div class="city-hero city-hero-amsterdam"><div class="city-hero-pattern"></div><div class="city-hero-text"><div class="city-hero-name">Ámsterdam</div><div class="city-hero-nights">4 noches · 17-21 junio</div></div></div>
+    <div class="subsection-title" style="padding:0 16px;">Sobre la ciudad</div>
+    <p class="section-p" style="padding:0 16px;">Ámsterdam es una ciudad de contrastes deliciosos: museos de clase mundial, canales patrimonio UNESCO, bicicletas por todos lados, mercados de flores y una escena cultural vibrante. Más acogedora que esperada, más segura de lo que su fama sugiere.</p>
+    <div class="subsection-title" style="padding:0 16px;">🌡 Clima en junio</div>
+    <div class="info-grid">
+      <div class="info-tile"><div class="info-tile-label">Temperatura</div><div class="info-tile-value">13°C – 20°C</div></div>
+      <div class="info-tile"><div class="info-tile-label">Lluvia</div><div class="info-tile-value">Posible · ¡siempre paraguas!</div></div>
+    </div>
+    <div class="subsection-title" style="padding:0 16px;">✨ No te pierdas</div>
+    <ul class="bullet-list" style="padding:0 16px;">
+      <li>Rijksmuseum – Rembrandt y Vermeer, gratuito con Museumkaart</li>
+      <li>Casa de Ana Frank – reservar SIEMPRE online con antelación (se agota en días)</li>
+      <li>Bloemenmarkt – el mercado flotante de flores sobre los canales</li>
+      <li>Jordaan – el barrio más lindo para pasear y tomar algo</li>
+      <li>Vondelpark – picnic si hace sol; los ámsterdameses sacan todo a la hierba</li>
+      <li>NEMO Science Museum – divertidísimo, terraza con vistas gratis</li>
+    </ul>
+    <div class="subsection-title" style="padding:0 16px;">🧀 No comer sin probar</div>
+    <ul class="bullet-list" style="padding:0 16px;">
+      <li><strong>Kaas (queso Gouda/Edam)</strong> – probar en una quesería artesanal</li>
+      <li><strong>Stroopwafel fresco</strong> – caliente y recién hecho, en el mercado Albert Cuyp</li>
+      <li><strong>Bitterballen</strong> – croquetas de carne; el snack con cerveza perfecta</li>
+      <li><strong>Herring (arenque)</strong> – el tradicional hollandse nieuwe, comerlo como los locales</li>
+      <li><strong>Poffertjes</strong> – mini-panqueques esponjosos con azúcar impalpable</li>
+    </ul>
+    <div class="subsection-title" style="padding:0 16px;">💡 Consejos</div>
+    <ul class="bullet-list" style="padding:0 16px;">
+      <li>¡Cuidado con las bicis! Tienen prioridad sobre los peatones en todo momento</li>
+      <li>El GVB (metro/tranvía) funciona con tarjeta OV-chipkaart o tarjeta de crédito contactless</li>
+      <li>La I amsterdam City Card da acceso ilimitado a museos + transporte</li>
+      <li>Evitar el turismo de drogas – está siendo regulado fuertemente</li>
+      <li>Los canales huelen bien en verano, al contrario de lo que se piensa</li>
+    </ul>
+    <div class="subsection-title" style="padding:0 16px;">🗺 Mapa de Ámsterdam</div>
+    <div class="map-embed" style="margin:0 16px 12px;">
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d78203!2d4.8952!3d52.3702!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c63fb5949a7755%3A0x6600fd4cb7c0af8d!2s%C3%81msterdam!5e0!3m2!1ses!2ses!4v1600000000003!5m2!1ses!2ses" allowfullscreen loading="lazy"></iframe>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION: PRACTICAL -->
+<div id="sec-practical" class="section" style="display:none">
+  <div class="section-header fade-in">
+    <div class="section-icon" style="background:rgba(201,169,110,0.1);">⚙️</div>
+    <div><div class="section-title">Info Práctica</div><div class="section-sub">Todo lo que necesitás saber</div></div>
+  </div>
+
+  <!-- MONEDAS -->
+  <div style="padding:0 16px;"><p class="subsection-title">💱 Monedas y pagos</p></div>
+  <div class="card" style="margin:0 16px 10px;">
+    <div class="practical-item">
+      <div class="practical-icon">🇬🇧</div>
+      <div><div class="practical-label">Londres – Moneda</div><div class="practical-value">Libra Esterlina (£ GBP) · No usa Euro</div></div>
+    </div>
+    <div class="practical-item">
+      <div class="practical-icon">🇫🇷🇧🇪🇳🇱</div>
+      <div><div class="practical-label">París, Brujas, Ámsterdam</div><div class="practical-value">Euro (€ EUR)</div></div>
+    </div>
+    <div class="practical-item">
+      <div class="practical-icon">💳</div>
+      <div><div class="practical-label">Tarjeta de crédito</div><div class="practical-value">Visa/Mastercard contactless funciona en casi todos lados · Llevar siempre algo de efectivo para emergencias</div></div>
+    </div>
+    <div class="practical-item">
+      <div class="practical-icon">🏧</div>
+      <div><div class="practical-label">Cajeros</div><div class="practical-value">Usar cajeros de bancos reconocidos · Evitar los cajeros de aeropuertos (comisiones altísimas)</div></div>
+    </div>
+    <div class="practical-item">
+      <div class="practical-icon">🍽</div>
+      <div><div class="practical-label">Propinas</div><div class="practical-value">🇬🇧 UK: 10-12% si no está incluido · 🇫🇷 FR: redondear o dejar monedas · 🇧🇪🇳🇱 Bélgica/Países Bajos: 5-10% opcional</div></div>
+    </div>
+  </div>
+
+  <!-- CONECTIVIDAD -->
+  <div style="padding:0 16px;"><p class="subsection-title">📱 Conectividad e internet</p></div>
+  <div class="card" style="margin:0 16px 10px;">
+    <div class="practical-item">
+      <div class="practical-icon">📶</div>
+      <div><div class="practical-label">eSIM recomendada</div><div class="practical-value">Airalo o Holafly – cobertura en toda Europa · Activar antes de viajar</div></div>
+    </div>
+    <div class="practical-item">
+      <div class="practical-icon">🔌</div>
+      <div><div class="practical-label">Enchufes</div><div class="practical-value">🇬🇧 Reino Unido: Tipo G (3 patas cuadradas) – ¡necesitan adaptador! · 🇫🇷🇧🇪🇳🇱 Europa: Tipo C/F (2 patas redondas)</div></div>
+    </div>
+    <div class="practical-item">
+      <div class="practical-icon">⚡</div>
+      <div><div class="practical-label">Voltaje</div><div class="practical-value">230V · 50Hz (igual que Argentina) · Los cargadores modernos son universales</div></div>
+    </div>
+  </div>
+
+  <!-- APPS RECOMENDADAS -->
+  <div style="padding:0 16px;"><p class="subsection-title">📲 Apps imprescindibles</p></div>
+  <div class="card" style="margin:0 16px 10px;">
+    <div class="practical-item"><div class="practical-icon">🗺</div><div><div class="practical-label">Mapas offline</div><div class="practical-value">Maps.me o Google Maps con mapas descargados offline</div></div></div>
+    <div class="practical-item"><div class="practical-icon">🚌</div><div><div class="practical-label">Transporte</div><div class="practical-value">Citymapper (UK y Europa) · Moovit · TfL Go (Londres)</div></div></div>
+    <div class="practical-item"><div class="practical-icon">🚗</div><div><div class="practical-label">Taxis/Autos</div><div class="practical-value">Uber · Bolt (más económico que Uber en Europa)</div></div></div>
+    <div class="practical-item"><div class="practical-icon">🍴</div><div><div class="practical-label">Restaurantes</div><div class="practical-value">TheFork (reservas gratis) · Google Maps reviews</div></div></div>
+    <div class="practical-item"><div class="practical-icon">🌐</div><div><div class="practical-label">Traducción</div><div class="practical-value">Google Translate con cámara para leer menús en inglés/francés/holandés</div></div></div>
+    <div class="practical-item"><div class="practical-icon">💰</div><div><div class="practical-label">Cambio de moneda</div><div class="practical-value">XE Currency – ver el tipo de cambio en tiempo real</div></div></div>
+  </div>
+
+  <!-- TRANSPORTE LOCAL -->
+  <div style="padding:0 16px;"><p class="subsection-title">🚇 Transporte público</p></div>
+  <div class="card" style="margin:0 16px 10px;">
+    <div class="practical-item"><div class="practical-icon">🇬🇧</div><div><div class="practical-label">Londres</div><div class="practical-value">Underground (Tube) + autobuses · Oyster Card o tarjeta contactless · ~£2.80 por viaje en metro</div></div></div>
+    <div class="practical-item"><div class="practical-icon">🇫🇷</div><div><div class="practical-label">París</div><div class="practical-value">Metro + RER + autobuses · Carnet de 10 viajes o Navigo Semaine · ~€2.15 por viaje</div></div></div>
+    <div class="practical-item"><div class="practical-icon">🇧🇪</div><div><div class="practical-label">Brujas</div><div class="practical-value">Ciudad pequeña – se recorre a pie. Tren a Gante y Bruselas desde la estación central</div></div></div>
+    <div class="practical-item"><div class="practical-icon">🇳🇱</div><div><div class="practical-label">Ámsterdam</div><div class="practical-value">Tranvías + metro + ferris · OV-chipkaart o tarjeta bancaria contactless · La bici es la forma local</div></div></div>
+  </div>
+
+  <!-- EMERGENCIAS -->
+  <div style="padding:0 16px;"><p class="subsection-title">🚨 Emergencias</p></div>
+  <div class="emergency-grid">
+    <div class="emergency-tile"><div class="emergency-number">112</div><div class="emergency-label">Emergencias Europa</div></div><div class="emergency-tile"><div class="emergency-number">999</div><div class="emergency-label">Emergencias UK</div></div><div class="emergency-tile"><div class="emergency-number">CORIS</div><div class="emergency-label">Seguro viajero · tienen los datos del seguro</div></div>
+    <div class="emergency-tile"><div class="emergency-number">Embajada AR</div><div class="emergency-label">Argentina en Londres: +44 207 318 1340</div></div>
+  </div>
+
+  <!-- SEGURO -->
+  <div class="alert-card alert-info" style="margin:0 16px 10px;">
+    <div class="alert-icon">🛡</div>
+    <div><div class="alert-title">Seguro de Asistencia al Viajero</div><div class="alert-text">CORIS Discover Multiviajes 30 · Llevar el número de póliza siempre en el celular. Guardar el número de emergencias del seguro en contactos.</div></div>
+  </div>
+
+  <div style="height:8px;"></div>
+</div>
+
+<!-- SECTION: CHECKLIST -->
+<div id="sec-checklist" class="section" style="display:none">
+  <div class="section-header fade-in">
+    <div class="section-icon" style="background:rgba(201,169,110,0.1);">✓</div>
+    <div><div class="section-title">Checklist</div><div class="section-sub">Preparación del viaje</div></div>
+  </div>
+
+  <div class="progress-wrap">
+    <div class="progress-label"><span>Progreso general</span><span id="progress-pct">0%</span></div>
+    <div class="progress-bar"><div class="progress-fill" id="progress-fill" style="width:0%"></div></div>
+  </div>
+
+  <div id="checklist-container"></div>
+  <div style="height:8px;"></div>
+</div>
+
+<!-- SECTION: TIPS -->
+<div id="sec-tips" class="section" style="display:none">
+  <div class="section-header fade-in">
+    <div class="section-icon" style="background:rgba(201,169,110,0.1);">💡</div>
+    <div><div class="section-title">Consejos</div><div class="section-sub">Del experto · No te olvides</div></div>
+  </div>
+
+  <!-- ALERTS -->
+  <div style="padding:0 16px 4px;"><p class="subsection-title">⚠️ No te olvides</p></div>
+  <div class="alert-card alert-warning" style="margin:0 16px 10px;">
+    <div class="alert-icon">🇬🇧</div>
+    <div><div class="alert-title">ETA para entrar al Reino Unido (Germán)</div><div class="alert-text">Germán necesita tramitar la ETA UK (Electronic Travel Authorisation) antes del viaje. Costo: £10. Tramitar en: gov.uk/apply-for-an-eta</div></div>
+  </div>
+  <div class="alert-card alert-warning" style="margin:0 16px 10px;">
+    <div class="alert-icon">🏙</div>
+    <div><div class="alert-title">City Tax · NO incluido en el precio</div><div class="alert-text">Se paga directamente en cada hotel: París ~€28 total · Brujas ~€8.5 · Ámsterdam ~€86. Llevar euros en efectivo para esto.</div></div>
+  </div>
+  <div class="alert-card alert-danger" style="margin:0 16px 10px;">
+    <div class="alert-icon">⚡</div>
+    <div><div class="alert-title">Adaptador de enchufes para Reino Unido</div><div class="alert-text">¡Obligatorio! El UK tiene enchufes de 3 patas cuadradas, incompatibles con los cargadores europeos y argentinos. Comprar uno universal antes de viajar.</div></div>
+  </div>
+  <div class="alert-card alert-info" style="margin:0 16px 10px;">
+    <div class="alert-icon">🚂</div>
+    <div><div class="alert-title">Eurostar · Llegar con tiempo</div><div class="alert-text">El Eurostar requiere control de pasaportes como si fuera un aeropuerto. Llegar a St. Pancras mínimo 45 minutos antes de la salida.</div></div>
+  </div>
+
+  <!-- TIPS EXPERTO -->
+  <div style="padding:0 16px 4px;"><p class="subsection-title">🧠 Consejos del experto</p></div>
+  <div class="tip-card">
+    <div class="tip-type">📸 Fotografía</div>
+    <div class="tip-text">La Torre Eiffel de noche es ESPECTACULAR pero fotografiarla con las luces encendidas puede tener restricciones de derechos de autor en publicaciones comerciales. Para uso personal en redes sociales, no hay problema.</div>
+  </div>
+  <div class="tip-card">
+    <div class="tip-type">💰 Ahorro inteligente</div>
+    <div class="tip-text">Los free tours (a propina) son la mejor inversión del viaje. Dan contexto histórico y permiten orientarse rápido en cada ciudad. La propina de €10-15 vale cada centavo comparado con tours pagos de €50+.</div>
+  </div>
+  <div class="tip-card">
+    <div class="tip-type">🍽 Gastronomía</div>
+    <div class="tip-text">En Europa el almuerzo es la comida más importante (y más barata). Buscar el "plat du jour" en París o el "menu del día" – menú completo por €12-18, mucho mejor que cenar a la noche en el mismo lugar por €30+.</div>
+  </div>
+  <div class="tip-card">
+    <div class="tip-type">⚠️ Estafas frecuentes</div>
+    <div class="tip-text">Tener cuidado con: (1) en París, personas que "encuentran" un anillo y te piden dinero; (2) en Ámsterdam, taxistas sin taxímetro; (3) en todos lados, cajeros que ofrecen "tipo de cambio garantizado" – siempre elegir la opción en moneda local.</div>
+  </div>
+  <div class="tip-card">
+    <div class="tip-type">🎒 Equipaje</div>
+    <div class="tip-text">Para 20 días, llevar: 1 valija grande + 1 mochila de cabina. Ropa para 7-8 días y lavar en el hotel (tienen servicio de lavandería). Zapatos cómodos son MÁS importantes que la ropa: caminarán 15-20km por día.</div>
+  </div>
+  <div class="tip-card">
+    <div class="tip-type">🌦 Clima · junio en Europa</div>
+    <div class="tip-text">Junio es el "verano europeo" pero no el verano argentino. Esperar días soleados de 20°C intercalados con lluvias. Llevar siempre: capas (una remera, una camisa de manga larga, un polar fino y una campera impermeable).</div>
+  </div>
+  <div class="tip-card">
+    <div class="tip-type">📱 Tecnología</div>
+    <div class="tip-text">Descargar mapas offline de cada ciudad ANTES de llegar (Google Maps permite guardarlos sin internet). Así no dependen del WiFi del hotel para orientarse por la calle.</div>
+  </div>
+  <div class="tip-card">
+    <div class="tip-type">🛡 Seguridad</div>
+    <div class="tip-text">Guardar una foto del pasaporte en el teléfono y enviar copia al mail personal. Llevar el dinero dividido en lugares distintos. No llevar toda la plata junta en la billetera.</div>
+  </div>
+
+  <!-- FAQ -->
+  <div style="padding:16px 16px 4px;"><p class="subsection-title">❓ Preguntas frecuentes</p></div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggleFaq(this)">¿Necesitan visa para estos países? <span class="faq-arrow">⌄</span></div>
+    <div class="faq-a">Los ciudadanos argentinos con pasaporte vigente pueden ingresar a Francia, Bélgica y Países Bajos SIN VISA (zona Schengen) por hasta 90 días. Para Reino Unido, desde 2024 se necesita la ETA (Electronic Travel Authorisation) que se tramita online por £10. Germán debe tramitarla antes del viaje.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggleFaq(this)">¿Qué pasa si pierdo el pasaporte? <span class="faq-arrow">⌄</span></div>
+    <div class="faq-a">Llamar inmediatamente al Consulado Argentino más cercano. En Londres: +44 207 318 1340. En París: +33 1 44 05 27 00. El seguro CORIS también puede asistir. Siempre tener una fotocopia del pasaporte en el celular y en papel aparte.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggleFaq(this)">¿Cómo ir del aeropuerto Gatwick al hotel? <span class="faq-arrow">⌄</span></div>
+    <div class="faq-a">Tomar el Gatwick Express desde el aeropuerto directo a la Estación Victoria (30 minutos). El hotel Riu Palace London Victoria está a pocos minutos a pie de la estación. Los pasajes son abiertos a cualquier horario.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggleFaq(this)">¿Cómo llegar al bus de FlixBus en París? <span class="faq-arrow">⌄</span></div>
+    <div class="faq-a">El FlixBus a Brujas sale de la Gare Routière de Bercy (Parc de Bercy, 75012 Paris). No es la Gare de Lyon; es específicamente la terminal de buses de Bercy. Ir en taxi o metro (línea 14, estación Cour Saint-Emilion). Llegar 30 minutos antes.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggleFaq(this)">¿Dónde cambiar moneda? <span class="faq-arrow">⌄</span></div>
+    <div class="faq-a">La mejor opción es retirar directamente en cajeros automáticos de bancos locales (evitar los de aeropuertos y casas de cambio turísticas). Usar tarjeta de crédito/débito con buena cobertura internacional. Evitar siempre las casas de cambio que dicen "sin comisión" en zonas turísticas.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggleFaq(this)">¿Cómo funciona el free tour? <span class="faq-arrow">⌄</span></div>
+    <div class="faq-a">Los free tours son gratuitos para reservar pero se paga propina al guía al final. La propina sugerida es €10-15 (o £10-12 en Londres) por persona. Se reservan online a través de Civitatis y se encuentran en un punto de reunión indicado. El guía habla en español.</div>
+  </div>
+
+  <div style="height:8px;"></div>
+</div>
+
+<!-- TOP NAV -->
+<div class="bottom-nav">
+  <div class="nav-item active" id="nav-home" onclick="navGo('home')"><span class="nav-icon">🏠</span>Inicio</div>
+  <div class="nav-item" id="nav-itinerary" onclick="navGo('itinerary')"><span class="nav-icon">🗓</span>Itinerario</div>
+  <div class="nav-item" id="nav-destinations" onclick="navGo('destinations')"><span class="nav-icon">🌍</span>Destinos</div>
+  <div class="nav-item" id="nav-practical" onclick="navGo('practical')"><span class="nav-icon">⚙️</span>Info</div>
+  <div class="nav-item" id="nav-checklist" onclick="navGo('checklist')"><span class="nav-icon">✓</span>Lista</div>
+  <div class="nav-item" id="nav-tips" onclick="navGo('tips')"><span class="nav-icon">💡</span>Consejos</div>
+</div>
+
+<script>
+// STARS
+(function(){
+  var c=document.getElementById('starsContainer');
+  if(!c)return;
+  for(var i=0;i<60;i++){
+    var s=document.createElement('div');
+    s.className='star';
+    s.style.cssText='left:'+Math.random()*100+'%;top:'+Math.random()*100+'%;--dur:'+(2+Math.random()*3)+'s;--del:'+Math.random()*3+'s;';
+    c.appendChild(s);
+  }
+})();
+
+// COUNTDOWN — vuelo sale 3 jun 2026 12:10 ARG = 15:10 UTC
+function updateCountdown(){
+  var target = new Date('2026-06-03T15:10:00Z');
+  var ret    = new Date('2026-06-22T10:40:00Z');
+  var now    = new Date();
+  var diff   = target - now;
+  var card   = document.querySelector('.countdown-card');
+  if(diff <= 0){
+    if(card){
+      if(now < ret){
+        card.innerHTML='<div class="countdown-label">🌍 ¡EL VIAJE ESTÁ EN CURSO!</div><div style="font-family:var(--font-serif);font-size:22px;color:var(--white);text-align:center;padding:8px 0;">¡Buen viaje, viajeros! 🎉</div>';
+      } else {
+        card.innerHTML='<div class="countdown-label">🏠 ¡Bienvenidos de vuelta!</div>';
+      }
+    }
+    return;
+  }
+  var days  = Math.floor(diff / 86400000);
+  var hours = Math.floor((diff % 86400000) / 3600000);
+  var mins  = Math.floor((diff % 3600000)  / 60000);
+  var secs  = Math.floor((diff % 60000)    / 1000);
+  var ed=document.getElementById('cd-days'),
+      eh=document.getElementById('cd-hours'),
+      em=document.getElementById('cd-mins'),
+      es=document.getElementById('cd-secs');
+  if(ed) ed.textContent = days;
+  if(eh) eh.textContent = hours;
+  if(em) em.textContent = mins;
+  if(es) es.textContent = secs;
+}
+updateCountdown();
+setInterval(updateCountdown, 1000);
+
+// NAVEGACIÓN
+var SECS = ['home','itinerary','destinations','practical','checklist','tips'];
+function navGo(id){
+  for(var i=0;i<SECS.length;i++){
+    var sec = document.getElementById('sec-'+SECS[i]);
+    var nav = document.getElementById('nav-'+SECS[i]);
+    if(sec) sec.style.display = 'none';
+    if(nav) nav.className = 'nav-item';
+  }
+  var s = document.getElementById('sec-'+id);
+  var n = document.getElementById('nav-'+id);
+  if(s) s.style.display = 'block';
+  if(n) n.className = 'nav-item active';
+  window.scrollTo(0,0);
+}
+
+// TABS DESTINOS
+var DESTS = ['london','paris','brujas','amsterdam'];
+function destGo(id){
+  for(var i=0;i<DESTS.length;i++){
+    var dc = document.getElementById('dest-'+DESTS[i]);
+    var tb = document.getElementById('tab-'+DESTS[i]);
+    if(dc) dc.style.display = 'none';
+    if(tb) tb.className = 'tab';
+  }
+  var ad = document.getElementById('dest-'+id);
+  var at = document.getElementById('tab-'+id);
+  if(ad) ad.style.display = 'block';
+  if(at) at.className = 'tab active';
+}
+
+// ACORDEÓN ITINERARIO
+function toggleDay(header){
+  var body = header.nextElementSibling;
+  if(!body) return;
+  if(body.style.display === 'block'){
+    body.style.display = 'none';
+    header.className = header.className.replace(' open','');
+  } else {
+    body.style.display = 'block';
+    if(header.className.indexOf('open') < 0) header.className += ' open';
+  }
+}
+
+// FAQ ACORDEÓN
+function toggleFaq(el){
+  var ans  = el.nextElementSibling;
+  var item = el.parentElement;
+  if(!ans) return;
+  if(ans.style.display === 'block'){
+    ans.style.display = 'none';
+    item.className = item.className.replace(' open','');
+  } else {
+    ans.style.display = 'block';
+    if(item.className.indexOf('open') < 0) item.className += ' open';
+  }
+}
+
+// CHECKLIST
+var checklists=[
+  {title:'📋 Documentación', items:['Pasaporte vigente (min. 6 meses desde regreso)','Seguro de viaje CORIS – guardar número de póliza','ETA UK tramitada (Germán)','Tarjeta de crédito/débito internacional','Fotocopia del pasaporte (papel + foto en celular)','Datos del hotel impresos o guardados offline']},
+  {title:'✈ Antes del vuelo', items:['Check-in online AIR EUROPA (24hs. antes)','Confirmar peso y tamaño del equipaje','Cargar todos los dispositivos','Descargar mapas offline (Google Maps)','Instalar apps: Civitatis, Bolt, Citymapper, XE','Comprar adaptador de enchufes UK','Activar eSIM (Airalo o Holafly)']},
+  {title:'🧳 Equipaje esencial', items:['Ropa interior: 7-8 mudas','Remeras/tops: 5-6','Pantalones/jeans: 2-3','Polar o sweater','Impermeable/campera liviana','Zapatos cómodos para caminar (¡los más importantes!)','Zapatos alternativos','Pijama','Neceser y artículos de higiene','Medicamentos personales','Paracetamol, Ibuprofeno, Antidiarreico','Paraguas compacto','Bolsas plásticas reutilizables']},
+  {title:'💊 Salud', items:['Control médico previo si es necesario','Vacunas al día','Medicamentos para 20 días + extra','Copia de recetas médicas si corresponde','Protector solar (verano europeo)','Repelente de insectos']},
+  {title:'🏠 Antes de salir de casa', items:['Apagar luces, gas y llaves de agua','Dejar copias de itinerario a familiar','Avisar al banco sobre viaje internacional','Dejar planta/mascota con alguien','Corroborar dirección y teléfono de cada hotel','Confirmación de reservas guardada offline']},
+];
+
+function initChecklist(){
+  var stored={};
+  try{stored=JSON.parse(localStorage.getItem('europeChecklist')||'{}');}catch(e){}
+  var container=document.getElementById('checklist-container');
+  if(!container)return;
+  container.innerHTML='';
+  var total=0, done=0;
+  for(var gi=0;gi<checklists.length;gi++){
+    var group=checklists[gi];
+    var div=document.createElement('div');
+    div.className='checklist-group';
+    var inner='<div class="checklist-group-title">'+group.title+' <span class="check-count" id="count-'+gi+'"></span></div>';
+    for(var ii=0;ii<group.items.length;ii++){
+      var key='g'+gi+'i'+ii;
+      var done_item=stored[key]||false;
+      total++;
+      if(done_item)done++;
+      inner+='<div class="check-item'+(done_item?' done':'')+'" onclick="toggleCheck(this,\''+key+'\')">'
+            +'<div class="check-box">'+(done_item?'✓':'')+'</div>'
+            +'<span class="check-label">'+group.items[ii]+'</span></div>';
+    }
+    div.innerHTML=inner;
+    container.appendChild(div);
+  }
+  updateProgress(done,total);
+  updateGroupCounts();
+}
+
+function toggleCheck(el,key){
+  var stored={};
+  try{stored=JSON.parse(localStorage.getItem('europeChecklist')||'{}');}catch(e){}
+  var isDone = el.className.indexOf('done') < 0;
+  stored[key]=isDone;
+  try{localStorage.setItem('europeChecklist',JSON.stringify(stored));}catch(e){}
+  el.className = isDone ? 'check-item done' : 'check-item';
+  var box=el.querySelector('.check-box');
+  if(box) box.textContent = isDone?'✓':'';
+  var all=document.querySelectorAll('.check-item').length;
+  var doneN=document.querySelectorAll('.check-item.done').length;
+  updateProgress(doneN,all);
+  updateGroupCounts();
+}
+
+function updateProgress(done,total){
+  var pct=total>0?Math.round(done/total*100):0;
+  var pp=document.getElementById('progress-pct');
+  var pf=document.getElementById('progress-fill');
+  if(pp) pp.textContent=pct+'%';
+  if(pf) pf.style.width=pct+'%';
+}
+
+function updateGroupCounts(){
+  for(var gi=0;gi<checklists.length;gi++){
+    var span=document.getElementById('count-'+gi);
+    if(!span) continue;
+    var grp=span.parentElement && span.parentElement.parentElement;
+    if(!grp) continue;
+    var allItems=grp.querySelectorAll('.check-item').length;
+    var doneItems=grp.querySelectorAll('.check-item.done').length;
+    span.textContent=doneItems+'/'+allItems;
+  }
+}
+
+initChecklist();
+</script>
+</body>
+</html>
